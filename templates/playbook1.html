@@ -1,0 +1,182 @@
+{% extends "base.html" %}
+{% block title %}Playbook 1{% endblock %}
+{% block navbar%}
+<a class="nav-link" href="/">Home</a>
+<a class="nav-link" href="/generate">Generate</a>
+<a class="nav-link" href="/run">Run</a>
+<a class="nav-link" href="/user">Create User</a>
+{% endblock %}
+{% block body %}<body class="text-center" style="height: 160%;">{% endblock %}
+{% block content %}
+{% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for msg in messages %}
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                          {{msg}}
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <h1 class="cover-heading" style="margin-top: 7%;">BGP VxLAN - 2 SPINE 2 LEAFS</h1>
+            <form class="needs-validation" novalidate action="#" method="POST">
+                <div class="row g-3">
+                  
+                  <div class="col-12" style="margin-bottom: 25px;">
+                    <label for="username" class="form-label">CCO<span class="bfont">ID</span></label>
+                    <div class="input-group has-validation">
+                      <span class="input-group-text">@</span>
+                      <input type="text" class="form-control" name="ccoid" placeholder="Enter your CCOID" required>
+                    <div class="invalid-feedback">
+                        Your username is required.
+                      </div>
+                    </div>
+                  </div>
+      
+                  <div class="col-12" style="margin-bottom: 5px;">
+                    <label for="email" class="form-label">Management IP for <span class="bfont">SPINE-A</span></label>
+                    <input type="text" class="form-control" name="ipaddress_1" placeholder="Example: 1.1.1.1">
+                    <div class="invalid-feedback">
+                      Please enter a valid IP ADDRESS.
+                    </div>
+                  </div>
+
+                  <div class="col-12" style="margin-bottom: 5px;">
+                    <label for="email" class="form-label">Management IP for <span class="bfont">SPINE-B</span></label>
+                    <input type="text" class="form-control" name="ipaddress_2" placeholder="Example: 2.2.2.2">
+                    <div class="invalid-feedback">
+                      Please enter a valid IP ADDRESS.
+                    </div>
+                  </div>
+
+                  <div class="col-12" style="margin-bottom: 5px;">
+                    <label for="email" class="form-label">Management IP for <span class="bfont">LEAF-A</span></label>
+                    <input type="text" class="form-control" name="ipaddress_3" placeholder="Example: 3.3.3.3">
+                    <div class="invalid-feedback">
+                      Please enter a valid IP ADDRESS.
+                    </div>
+                  </div>
+
+                  <div class="col-12" style="margin-bottom: 25px;">
+                    <label for="email" class="form-label">Management IP for <span class="bfont">LEAF-B</span></label>
+                    <input type="text" class="form-control" name="ipaddress_4" placeholder="Example: 4.4.4.4">
+                    <div class="invalid-feedback">
+                      Please enter a valid IP ADDRESS.
+                    </div>
+                  </div>
+                  
+
+                  <div class="col-12" style="margin-bottom: 5px;">
+                    <label for="email" class="form-label">Interface between: <span class="bfont">SPINE-A -> LEAF-A</span></label>
+                    <input type="text" class="form-control" name="int_SA_LA" placeholder="Example: 1/1">
+                    <div class="invalid-feedback">
+                      Please enter a valid IP ADDRESS.
+                    </div>
+                  </div>
+
+                  <div class="col-12" style="margin-bottom: 5px;">
+                    <label for="email" class="form-label">Interface between: <span class="bfont">LEAF-A -> SPINE-A</span></label>
+                    <input type="text" class="form-control" name="int_LA_SA" placeholder="Example: 1/2">
+                    <div class="invalid-feedback">
+                      Please enter a valid IP ADDRESS.
+                    </div>
+                  </div>
+
+                  <div class="col-12" style="margin-bottom: 5px;">
+                    <label for="email" class="form-label">Interface between: <span class="bfont">SPINE-A -> LEAF-B</span></label>
+                    <input type="text" class="form-control" name="int_SA_LB" placeholder="Example: 1/3">
+                    <div class="invalid-feedback">
+                      Please enter a valid IP ADDRESS.
+                    </div>
+                  </div>
+
+                  <div class="col-12" style="margin-bottom: 5px;">
+                    <label for="email" class="form-label">Interface between: <span class="bfont">LEAF-B -> SPINE-A</span></label>
+                    <input type="text" class="form-control" name="int_LB_SA" placeholder="Example: 1/4">
+                    <div class="invalid-feedback">
+                      Please enter a valid IP ADDRESS.
+                    </div>
+                  </div>
+
+                  <div class="col-12" style="margin-bottom: 5px;">
+                    <label for="email" class="form-label">Interface between: <span class="bfont">SPINE-B -> LEAF-A</span></label>
+                    <input type="text" class="form-control" name="int_SB_LA" placeholder="Example: 1/5">
+                    <div class="invalid-feedback">
+                      Please enter a valid IP ADDRESS.
+                    </div>
+                  </div>
+                  <div class="col-12" style="margin-bottom: 5px;">
+                    <label for="email" class="form-label">Interface between: <span class="bfont">LEAF-A -> SPINE-B</span></label>
+                    <input type="text" class="form-control" name="int_LA_SB" placeholder="Example: 1/6">
+                    <div class="invalid-feedback">
+                      Please enter a valid IP ADDRESS.
+                    </div>
+                  </div>
+                  <div class="col-12" style="margin-bottom: 5px;">
+                    <label for="email" class="form-label">Interface between: <span class="bfont">SPINE-B -> LEAF-B</span></label>
+                    <input type="text" class="form-control" name="int_SB_LB" placeholder="Example: 1/7">
+                    <div class="invalid-feedback">
+                      Please enter a valid IP ADDRESS.
+                    </div>
+                  </div>
+                  <div class="col-12" style="margin-bottom: 5px;">
+                    <label for="email" class="form-label">Interface between: <span class="bfont">LEAF-B -> SPINE-B</span></label>
+                    <input type="text" class="form-control" name="int_LB_SB" placeholder="Example: 1/8">
+                    <div class="invalid-feedback">
+                      Please enter a valid IP ADDRESS.
+                    </div>
+                  </div>
+                    <div class="col-12" style="margin-bottom: 5px;">
+                      <label for="email" class="form-label">Playbook <span class="bfont">name:</span></label>
+                      <input type="text" class="form-control" name="playbook_name" placeholder="Example: BGP-VPN-POD1331">
+                      <div class="invalid-feedback">
+                        Please enter a valid playbook name.
+                      </div>
+                  </div>
+                  <div class="col-12" style="margin-bottom: 5px;">
+                    <label for="email" class="form-label">LAB <span class="bfont">name:</span></label>
+                    <input type="text" class="form-control" name="lab_name" placeholder="Example: 1331 or CALO">
+                    <div class="invalid-feedback">
+                      Please enter a valid LAB name.
+                    </div>
+                </div>
+                </div>
+      
+                <hr class="my-4">
+      
+                <h4 class="mb-3">Do you want to use default password?</h4>
+      
+                <div class="my-3">
+                  <div class="form-check">
+                    <input value="yes" name="defaultP" type="radio" class="form-check-input" checked required>
+                    <label class="form-check-label" for="yes">Yes</label>
+                  </div>
+                  <div class="form-check">
+                    <input value="no" name="defaultP" type="radio" class="form-check-input" required>
+                    <label class="form-check-label" for="no">No</label>
+                  </div>
+                </div>
+                
+                <div class="col-12">
+                  <label for="email" class="form-label">Login <span class="text-muted">(Optional)</span></label>
+                  <input type="text" class="form-control" name="login" placeholder="Example: admin">
+                  <div class="invalid-feedback">
+                    Please enter a valid email address for shipping updates.
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <label for="email" class="form-label">Password <span class="text-muted">(Optional)</span></label>
+                  <input type="text" class="form-control" name="password" placeholder="Example: cisco!123">
+                  <div class="invalid-feedback">
+                    Please enter a valid email address for shipping updates.
+                  </div>
+                </div>
+
+                <hr class="my-4">
+      
+                <button class="w-100 btn btn-primary btn-lg" type="submit" style="margin-bottom: 3%;">Generate Playbook!</button>
+              </form>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Run Playbook{% endblock %}
+{% block navbar%}
+<a class="nav-link" href="/">Home</a>
+<a class="nav-link" href="/generate">Generate</a>
+<a class="nav-link active" href="/run">Run</a>
+<a class="nav-link" href="/user">Create User</a>
+{% endblock %}
+{% block style %}
+<style>
+  body{
+   height: {{ size }}; 
+  }
+</style>
+{% endblock%}
+{% block body %}<body class="text-center">{% endblock %}
+{% block content %}
+{% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for msg in messages %}
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert" style="position: relative; top:-115%">
+                          {{msg}}
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                {% for line in text %}
+                {% if line[0:2] == "PL" %}
+                <h2 class="cover-heading" style="margin-top: 9%;">{{ line }}</h1>
+                {% elif line[1:3] == "ok" %}
+                <p style="color:#93FF33;">{{ line }}</p>
+                {% elif line[1:3] == "ch" %}
+                <p style="color:#FFBD33;">{{ line }}</p>
+                {% elif line[1:3] == "sk" %}
+                <p style="color:#33F5FF;">{{ line }}</p>
+                {% elif line[1:3] == "er" %}
+                <p style="color:#FF3933;">{{ line }}</p>
+                {% else %}
+                <p>{{ line }}</p>
+                {% endif %}
+                {% endfor %}
+                {% endwith %}
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Generate Playbook{% endblock %}
+{% block navbar%}
+<a class="nav-link" href="/">Home</a>
+<a class="nav-link active" href="/generate">Generate</a>
+<a class="nav-link" href="/run">Run</a>
+<a class="nav-link" href="/user">Create User</a>
+{% endblock %}
+{% block body %}<body class="text-center">{% endblock %}
+{% block content %}
+{% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for msg in messages %}
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                          {{msg}}
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <h1 class="cover-heading">Here is the list of available playbooks:</h1>
+            <br>
+            <p class="lead">
+              <a href="/playbook1" class="btn btn-lg btn-secondary">Playbook 1 - VxLAN BGP - 2 SPINES 2 LEAFS</a>
+            </p>
+            <p class="lead">
+                <a href="#" class="btn btn-lg btn-secondary">Playbook 2 - DON'T EXIST YET</a>
+            </p>
+            <p class="lead">
+                <a href="#" class="btn btn-lg btn-secondary">Playbook 3 - DON'T EXIST YET</a>
+            </p>
+            <p class="lead">
+                <a href="#" class="btn btn-lg btn-secondary">Playbook 4 - DON'T EXIST YET</a>
+            </p>
+
+{% endblock %}

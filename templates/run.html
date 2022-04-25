@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}Run Playbook{% endblock %}
+{% block navbar%}
+<a class="nav-link" href="/">Home</a>
+<a class="nav-link" href="/generate">Generate</a>
+<a class="nav-link active" href="/run">Run</a>
+<a class="nav-link" href="/user">Create User</a>
+{% endblock %}
+{% block body %}<body class="text-center" style="height: 100%;">{% endblock %}
+{% block content %}
+{% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for msg in messages %}
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert" style="position: relative; top:-115%">
+                          {{msg}}
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <h1 class="cover-heading" style="margin-bottom: 9%;">Run this playbook!</h1>
+            <p style="margin-bottom: 5%;">After adding the playbook name, please don't refresh the page!</p>
+            <form class="needs-validation" novalidate action="#" method="POST">
+                <div class="row g-3">
+                  <div class="col-12" style="margin-bottom: 6%;">
+                    <label for="username" class="form-label">Playbook <span class="bfont">name:</span></label>
+                    <select class="custom-select d-block w-100" name="playbook" required>
+                      <option value="">Choose...</option>
+                      {% for count in range(length) %}
+                                <option value={{list[count][3]}}>{{list[count][3]}}</option>
+                      {% endfor %}
+                    </select>
+                    <div class="invalid-feedback">
+                      Please select a valid country.
+                    </div>
+                  </div>
+      
+                <button class="w-100 btn btn-primary btn-lg" type="submit" style="margin-bottom: 3%;">Run!</button>
+              </form>
+              <table class="table table-striped table-dark">
+                <thead>
+                  <tr>
+                    <th scope="col">Template</th>
+                    <th scope="col">CCOID</th>
+                    <th scope="col">LAB</th>
+                    <th scope="col">Path</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for count in range(length) %}
+                  <tr>
+                          {% for word in list[count]%}
+                            <th scope="row">{{word}}</th>
+                          {% endfor %}
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+{% endblock %}
